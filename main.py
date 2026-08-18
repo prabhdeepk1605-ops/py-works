@@ -9,8 +9,6 @@ def chat():
 
 
 
-
-
 @app.route('/api/sum', methods=['POST'])
 def sum_number():
     if not request.is_json:
