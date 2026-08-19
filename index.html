@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sum Calculator</title>
+    <title>multiply Calculator</title>
     <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
-    <h2>Sum two numbers</h2>
+    <h2>multiply two numbers</h2>
 
     <div class="hi">
-        <form id="sumForm">
+        <form id="multiplyForm">
             <input id="a" type="number" step="any" placeholder="First number" required><br>
             <input id="b" type="number" step="any" placeholder="Second number" required><br>
             <button type="submit">Calculate</button>
@@ -20,7 +20,7 @@
     <h1 id="result">Result will appear here</h1>
 
     <script>
-        const form = document.getElementById('sumForm');
+        const form = document.getElementById('multiplyForm');
         const resultEl = document.getElementById('result');
 
         form.addEventListener('submit', e => {
@@ -28,7 +28,7 @@
             const a = document.getElementById('a').value;
             const b = document.getElementById('b').value;
 
-            fetch('/api/sum', {
+            fetch('/api/multiply', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ a: a, b: b })
@@ -38,14 +38,14 @@
                 return response.json();
             })
             .then(data => {
-                if (data.sum !== undefined) {
-                    resultEl.textContent = 'Sum: ' + data.sum;
+                if (data.multiply !== undefined) {
+                    resultEl.textContent = 'multiply: ' + data.multiply;
                 } else {
                     resultEl.textContent = 'Error: ' + (data.error || 'Unknown error');
                 }
             })
             .catch(err => {
-                resultEl.textContent = 'Failed to calculate sum';
+                resultEl.textContent = 'Failed to calculate multiply';
                 console.error('Error:', err);
             });
         });

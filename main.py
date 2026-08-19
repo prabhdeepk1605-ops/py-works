@@ -8,6 +8,11 @@ def index():
     return send_from_directory('.', 'index.html')
 
 
+@app.route('/styles/<path:filename>')
+def styles(filename):
+    return send_from_directory('styles', filename)
+
+
 @app.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -19,8 +24,8 @@ def add_cors_headers(response):
 
 
 
-@app.route('/api/sum', methods=['POST'])
-def sum_numbers():
+@app.route('/api/multiply', methods=['POST'])
+def multiply_numbers():
     if not request.is_json:
         return jsonify({"error": "Expected JSON body with 'a' and 'b'"}), 400
     data = request.get_json()
@@ -32,8 +37,8 @@ def sum_numbers():
         b = float(b)
     except Exception:
         return jsonify({"error": "Invalid numbers provided"}), 400
-    result = a + b
-    return jsonify({"sum": result})
+    result = a * b
+    return jsonify({"multiply": result})
 
 
 if __name__ == '__main__':
